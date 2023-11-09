@@ -61,7 +61,7 @@ public:
 		delete[] arr;
 	}
 private:
-	size_t size;
+	int size;
 	int* arr;
 	int count = 0;
 
