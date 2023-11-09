@@ -12,18 +12,18 @@ public:
 		}
 		else
 		{
-			throw std::exception("add_element Выход за границы массива");
+			throw std::exception("add_element => Выход за границы массива");
 		}
 	}
 	int get_element(const int index)
 	{
-		if (index < size)
+		if ( (index < size) && (index >= 0) )
 		{
 			return arr[index];
 		}
 		else
 		{
-			throw std::exception("get_element Выход за границы массива");
+			throw std::exception("get_element => Выход за границы массива");
 		}
 		
 	}
@@ -45,16 +45,23 @@ public:
 	}
 	smart_array(int size)
 	{
-		int* arr = new int[size]();
-		this->size = size;
-		this->arr = arr;
+		if (size < 0)
+		{
+			throw std::exception("Конструктор 'smart_array' => Отрицательный размер массива");
+		}
+		else
+		{
+			int* arr = new int[size]();
+			this->size = size;
+			this->arr = arr;
+		}
 	}
 	~smart_array()
 	{
 		delete[] arr;
 	}
 private:
-	int size;
+	size_t size;
 	int* arr;
 	int count = 0;
 
@@ -86,9 +93,10 @@ int main ()
 		std::cout <<arr0.get_element(0)	<< std::endl;
 		std::cout <<arr0.get_element(1)	<< std::endl;
 		std::cout <<arr0.get_element(2) << std::endl;
+
 		std::cout <<arr1.get_element(0)	<< std::endl;
 		std::cout <<arr1.get_element(1)	<< std::endl;
-		std::cout <<arr1.get_element(2) << std::endl;
+
 		std::cout <<arr2.get_element(0) << std::endl;
 		std::cout <<arr2.get_element(1) << std::endl;
 		std::cout <<arr2.get_element(2) << std::endl;
